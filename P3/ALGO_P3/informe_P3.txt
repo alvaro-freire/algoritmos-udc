@@ -1,0 +1,419 @@
+/*
+ * TÍTUL0: ALGORITMOS
+ * SUBTÍTUL0: Práctica 3
+ * @author Mateo Díaz Allegue @login mateo.diaz
+ * @author Álvaro Freire Ares @login alvaro.freirea
+ * GRUPO: 4.2
+ * DATE: 16 / 11 / 2021
+ */
+
+ INTRODUCCIÓN:
+
+ - Análisis de algoritmos de ordenación de un vector dependiendo del orden inicial
+ de este. Los casos analizados son: vector ordenado ascendentemente, vector ordenado
+ descendentemente y vector ordenado aleatoriamente. Se analizan dos tipos de algoritmos:
+ ordenación por inserción y ordenación rápida (Quicksort). Para este último se empleará
+ una selección del pivote por mediana de 3 y un umbral para detectar vectores pequeños.
+ Se hará un test con distintos valores del umbral: 1 (no se realiza la llamada al método
+ de ordenación por inserción), 10 y 100.
+
+     Las medidas están realizadas en microsegundos. Si la medida del tiempo de ejecución
+ es menor a 500 microsegundos se realiza automáticamente un bucle de 1000 iteraciones
+ del algoritmo a analizar y se calcula la media de los tiempos tardados. En este caso
+ se indicará con '*' en la tabla.
+
+
+ - Características de la máquina dónde se realiza la medición:
+ 	* OS: Ubuntu 21.04
+ 	* Kernel: Linux 5.11.0-37-generic
+ 	* CPU: Intel Core i7-8550U a 1.80 GHz
+ 	* Memoria Principal: 16 GB
+ 	* Compilador: gcc 11.2.0
+
+
+ MEDICIONES:
+
+ Unidades de las medidas de tiempo:
+ * µs (microsegundos)
+
+    # ORDENACIÓN POR INSERCIÓN
+
+ 	* Inicialización ascendente:
+
+        n            t(n)       t(n)/(n^0.8)         t(n)/(n)       t(n)/(n^1.1)
+      500    *      1.517          0.010515          0.003034          0.001630
+     1000    *      2.964          0.011800          0.002964          0.001486
+     2000    *      6.573          0.015029          0.003287          0.001537 <-- /* Medición anómala */
+     4000    *     12.366          0.016240          0.003092          0.001349
+     8000    *     24.539          0.018509          0.003067          0.001249
+    16000    *     49.648          0.021508          0.003103          0.001179
+    32000    *     98.262          0.024449          0.003071          0.001088
+    64000    *    200.803          0.028696          0.003138          0.001037
+   128000    *    382.043          0.031358          0.002985          0.000921
+   256000         766.000          0.036111          0.002992          0.000861
+   512000        1599.000          0.043294          0.003123          0.000839
+
+ 	(*) : tiempo promedio de 1000 ejecuciones del algoritmo
+
+ * Cotas: < n^0.80, n, n^1.10 >
+
+ 	- Cota subestimada: f(n) = n^0.80
+ 	- Cota ajusutada: g(n) = n || Cte. = 0.003
+ 	- Cota sobreestimada: h(n) = n^1.10
+
+ - t(n) / f(n) cuando n -> infinito ---> infinito (diverge)
+ - t(n) / g(n) cuando n -> infinito ---> Valor constante = Cte > 0
+ - t(n) / h(n) cuando n -> infinito ---> 0 (decrece)
+
+ * Conclusión: t(n) = O(g(n)) = O(n)
+
+ 	* Inicialización descendente:
+
+        n            t(n)       t(n)/(n^1.9)        t(n)/(n^2)      t(n)/(n^2.1)
+      500    *    276.684          0.002060          0.001107          0.000594
+     1000        1081.000          0.002157          0.001081          0.000542
+     2000        4436.000          0.002372          0.001109          0.000519
+     4000       17915.000          0.002566          0.001120          0.000489
+     8000       71070.000          0.002728          0.001110          0.000452
+    16000      281859.000          0.002899          0.001101          0.000418
+    32000     1123612.000          0.003096          0.001097          0.000389
+
+ 	(*) : tiempo promedio de 1000 ejecuciones del algoritmo
+
+ * Cotas: < n^1.90, n², n^2.10 >
+
+ 	- Cota subestimada: f(n) = n^1.90
+ 	- Cota ajusutada: g(n) = n² || Cte. = 0.0011
+ 	- Cota sobreestimada: h(n) = n ^2.20
+
+ - t(n) / f(n) cuando n -> infinito ---> infinito (diverge)
+ - t(n) / g(n) cuando n -> infinito ---> Valor constante = Cte > 0
+ - t(n) / h(n) cuando n -> infinito ---> 0 (decrece)
+
+ * Conclusión: t(n) = O(g(n)) = O(n²)
+
+ 	* Inicialización aleatoria:
+
+        n            t(n)       t(n)/(n^1.9)        t(n)/(n^2)      t(n)/(n^2.1)
+      500    *    137.671          0.001025          0.000551          0.000296
+     1000         568.000          0.001133          0.000568          0.000285
+     2000        2202.000          0.001177          0.000550          0.000257
+     4000        8597.000          0.001231          0.000537          0.000234
+     8000       36793.000          0.001412          0.000575          0.000233
+    16000      143461.000          0.001475          0.000560          0.000213
+    32000      561643.000          0.001548          0.000548          0.000194
+
+
+ 	(*) : tiempo promedio de 1000 ejecuciones del algoritmo
+
+ * Cotas: < n^1.90, n², n^2.10 >
+
+ 	- Cota subestimada: f(n) = n^1.90
+ 	- Cota ajusutada: g(n) = n² || Cte. = 0.0005
+ 	- Cota sobreestimada: h(n) = n^2.10
+
+ - t(n) / f(n) cuando n -> infinito ---> infinito (diverge)
+ - t(n) / g(n) cuando n -> infinito ---> Valor constante = Cte > 0
+ - t(n) / h(n) cuando n -> infinito ---> 0 (decrece)
+
+ * Conclusión: t(n) = O(g(n)) = O(n²)
+
+    # ORDENACIÓN RÁPIDA ( UMBRAL = 1 )
+
+ 	* Inicialización ascendente:
+
+        n            t(n)           t(n)/(n)     t(n)/(n^1.09)      t(n)/(n^1.2)
+      500    *     11.569          0.023138          0.013226          0.006676
+     1000    *     25.738          0.025738          0.013822          0.006465
+     2000    *     54.134          0.027067          0.013657          0.005919
+     4000    *    114.013          0.028503          0.013512          0.005426
+     8000    *    244.473          0.030559          0.013610          0.005064
+    16000         532.000          0.033250          0.013913          0.004797
+    32000        1084.000          0.033875          0.013317          0.004255
+    64000        2215.000          0.034609          0.012783          0.003784
+   128000        4624.000          0.036125          0.012536          0.003438
+   256000       10163.000          0.039699          0.012943          0.003290
+   512000       21379.000          0.041756          0.012790          0.003012
+
+ 	(*) : tiempo promedio de 1000 ejecuciones del algoritmo
+
+ * Cotas: < n, n^1.09, n^1.20 >
+
+ 	- Cota subestimada: f(n) = n
+ 	- Cota ajusutada: g(n) = n^1.09 || Cte. = 0.013
+ 	- Cota sobreestimada: h(n) = n^1.20
+
+ - t(n) / f(n) cuando n -> infinito ---> infinito (diverge)
+ - t(n) / g(n) cuando n -> infinito ---> Valor constante = Cte > 0
+ - t(n) / h(n) cuando n -> infinito ---> 0 (decrece)
+
+ * Conclusión: t(n) = O(g(n)) = O(n^1.09)
+
+ 	* Inicialización descendente:
+
+        n            t(n)           t(n)/(n)     t(n)/(n^1.08)      t(n)/(n^1.2)
+      500    *     12.057          0.024114          0.014667          0.006958
+     1000    *     26.658          0.026658          0.015340          0.006696
+     2000    *     55.692          0.027846          0.015159          0.006089
+     4000    *    117.169          0.029292          0.015086          0.005576
+     8000    *    247.213          0.030902          0.015057          0.005121
+    16000         547.000          0.034188          0.015759          0.004932
+    32000        1082.000          0.033813          0.014746          0.004247
+    64000        2274.000          0.035531          0.014659          0.003885
+   128000        4751.000          0.037117          0.014488          0.003533
+   256000       10468.000          0.040891          0.015100          0.003388
+   512000       21949.000          0.042869          0.014976          0.003092
+
+ 	(*) : tiempo promedio de 1000 ejecuciones del algoritmo
+
+ * Cotas: < n, n^1.08, n^1.20 >
+
+ 	- Cota subestimada: f(n) = n
+ 	- Cota ajusutada: g(n) = n^1.08 || Cte. = (0.014 - 0.015)
+ 	- Cota sobreestimada: h(n) = n^1.20
+
+ - t(n) / f(n) cuando n -> infinito ---> infinito (diverge)
+ - t(n) / g(n) cuando n -> infinito ---> Valor constante = Cte > 0
+ - t(n) / h(n) cuando n -> infinito ---> 0 (decrece)
+
+ * Conclusión: t(n) = O(g(n)) = O(n^1.08)
+
+ 	* Inicialización aleatoria:
+
+        n            t(n)           t(n)/(n)    t(n)/(n*log(n))     t(n)/(n^1.3)
+      500    *     15.487          0.030974          0.004984          0.004801 <-- /* Mediciones */
+     1000    *     56.804          0.056804          0.008223          0.007151 <-- /*  anómalas  */
+     2000    *    150.439          0.075219          0.009896          0.007692
+     4000    *    362.291          0.090573          0.010920          0.007523
+     8000         766.000          0.095750          0.010654          0.006460
+    16000        1632.000          0.102000          0.010537          0.005589
+    32000        3484.000          0.108875          0.010496          0.004846
+    64000        7391.000          0.115484          0.010435          0.004175
+   128000       16654.000          0.130109          0.011064          0.003821
+   256000       34740.000          0.135703          0.010897          0.003237
+   512000       70230.000          0.137168          0.010434          0.002657
+
+ 	(*) : tiempo promedio de 1000 ejecuciones del algoritmo
+
+ * Cotas: < n, n*log(n), n^1.30 >
+
+ 	- Cota subestimada: f(n) = n
+ 	- Cota ajusutada: g(n) = n*log(n) || Cte. = 0.010
+ 	- Cota sobreestimada: h(n) = n^1.30
+
+ - t(n) / f(n) cuando n -> infinito ---> infinito (diverge)
+ - t(n) / g(n) cuando n -> infinito ---> Valor constante = Cte > 0
+ - t(n) / h(n) cuando n -> infinito ---> 0 (decrece)
+
+ * Conclusión: t(n) = O(g(n)) = O(n*log(n))
+
+    # ORDENACIÓN RÁPIDA ( UMBRAL = 10 )
+
+ 	* Inicialización ascendente:
+
+        n            t(n)           t(n)/(n)     t(n)/(n^1.10)      t(n)/(n^1.2)
+      500    *      7.604          0.015208          0.008169          0.004388
+     1000    *     17.287          0.017287          0.008664          0.004342
+     2000    *     38.495          0.019247          0.009001          0.004209
+     4000    *     84.649          0.021162          0.009233          0.004029
+     8000    *    176.687          0.022086          0.008991          0.003660
+    16000    *    378.650          0.023666          0.008989          0.003414
+    32000         833.000          0.026031          0.009225          0.003269
+    64000        1745.000          0.027266          0.009016          0.002981
+   128000        3662.000          0.028609          0.008826          0.002723
+   256000        8133.000          0.031770          0.009145          0.002632
+   512000       17204.000          0.033602          0.009025          0.002424
+
+ 	(*) : tiempo promedio de 1000 ejecuciones del algoritmo
+
+ * Cotas: < n, n^1.10, n^1.20 >
+
+ 	- Cota subestimada: f(n) = n
+ 	- Cota ajusutada: g(n) = n^1.10 || Cte. = (0.008 - 0.009)
+ 	- Cota sobreestimada: h(n) = n^1.20
+
+ - t(n) / f(n) cuando n -> infinito ---> infinito (diverge)
+ - t(n) / g(n) cuando n -> infinito ---> Valor constante = Cte > 0
+ - t(n) / h(n) cuando n -> infinito ---> 0 (decrece)
+
+ * Conclusión: t(n) = O(g(n)) = O(n^1.10)
+
+ 	* Inicialización descendente:
+
+        n            t(n)           t(n)/(n)     t(n)/(n^1.10)      t(n)/(n^1.2)
+      500    *      8.250          0.016500          0.008863          0.004761
+     1000    *     18.070          0.018070          0.009056          0.004539
+     2000    *     39.925          0.019962          0.009335          0.004365
+     4000    *     85.316          0.021329          0.009306          0.004060
+     8000    *    182.984          0.022873          0.009311          0.003791
+    16000    *    393.026          0.024564          0.009330          0.003544
+    32000         831.000          0.025969          0.009203          0.003262
+    64000        1769.000          0.027641          0.009140          0.003022
+   128000        3745.000          0.029258          0.009027          0.002785
+   256000        8315.000          0.032480          0.009350          0.002691
+   512000       17273.000          0.033736          0.009061          0.002434
+
+ 	(*) : tiempo promedio de 1000 ejecuciones del algoritmo
+
+ * Cotas: < n, n^1.10, n^1.20 >
+
+ 	- Cota subestimada: f(n) = n
+ 	- Cota ajusutada: g(n) = n^1.10 || Cte. = 0.009
+ 	- Cota sobreestimada: h(n) = n^1.20
+
+ - t(n) / f(n) cuando n -> infinito ---> infinito (diverge)
+ - t(n) / g(n) cuando n -> infinito ---> Valor constante = Cte > 0
+ - t(n) / h(n) cuando n -> infinito ---> 0 (decrece)
+
+ * Conclusión: t(n) = O(g(n)) = O(n^1.10)
+
+ 	* Inicialización aleatoria:
+
+        n            t(n)       t(n)/(n^1.1)    t(n)/(n*log(n))     t(n)/(n^1.3)
+      500    *     11.385          0.022770          0.003664          0.003529 <-- /* Mediciones */
+     1000    *     45.619          0.045619          0.006604          0.005743 <-- /*  anómalas  */
+     2000    *    130.271          0.065135          0.008569          0.006661
+     4000    *    319.168          0.079792          0.009620          0.006627
+     8000         703.000          0.087875          0.009778          0.005928
+    16000        1460.000          0.091250          0.009426          0.005000
+    32000        3285.000          0.102656          0.009896          0.004569
+    64000        6832.000          0.106750          0.009646          0.003859
+   128000       15152.000          0.118375          0.010066          0.003476
+   256000       32071.000          0.125277          0.010060          0.002988
+   512000       65471.000          0.127873          0.009727          0.002477
+
+ 	(*) : tiempo promedio de 1000 ejecuciones del algoritmo
+
+ * Cotas: < n^1.10, n*log(n), n^1.30 >
+
+ 	- Cota subestimada: f(n) = n^1.10
+ 	- Cota ajusutada: g(n) = n*log(n) || Cte. = (0.009 - 0.010)
+ 	- Cota sobreestimada: h(n) = n^1.30
+
+ - t(n) / f(n) cuando n -> infinito ---> infinito (diverge)
+ - t(n) / g(n) cuando n -> infinito ---> Valor constante = Cte > 0
+ - t(n) / h(n) cuando n -> infinito ---> 0 (decrece)
+
+ * Conclusión: t(n) = O(g(n)) = O(n*log(n))
+
+
+    # ORDENACIÓN RÁPIDA ( UMBRAL = 100 )
+
+ 	* Inicialización ascendente:
+
+        n            t(n)           t(n)/(n)     t(n)/(n^1.13)      t(n)/(n^1.2)
+      500    *      4.200          0.008400          0.003745          0.002424 <-- /* Mediciones */
+     1000    *     10.479          0.010479          0.004269          0.002632 <-- /*  anómalas  */
+     2000    *     24.661          0.012331          0.004590          0.002696
+     4000    *     54.871          0.013718          0.004667          0.002611
+     8000    *    122.683          0.015335          0.004768          0.002541
+    16000    *    270.435          0.016902          0.004802          0.002438
+    32000         601.000          0.018781          0.004876          0.002359
+    64000        1272.000          0.019875          0.004715          0.002173
+   128000        2756.000          0.021531          0.004668          0.002049
+   256000        6137.000          0.023973          0.004749          0.001986
+   512000       13273.000          0.025924          0.004693          0.001870
+
+ 	(*) : tiempo promedio de 1000 ejecuciones del algoritmo
+
+ * Cotas: < n, n^1.13, n^1.20 >
+
+ 	- Cota subestimada: f(n) = n
+ 	- Cota ajusutada: g(n) = n^1.13 || Cte. = (0.0045 - 0.0049)
+ 	- Cota sobreestimada: h(n) = n^1.20
+
+ - t(n) / f(n) cuando n -> infinito ---> infinito (diverge)
+ - t(n) / g(n) cuando n -> infinito ---> Valor constante = Cte > 0
+ - t(n) / h(n) cuando n -> infinito ---> 0 (decrece)
+
+ * Conclusión: t(n) = O(g(n)) = O(n^1.13)
+
+ 	* Inicialización descendente:
+
+        n            t(n)           t(n)/(n)     t(n)/(n^1.13)      t(n)/(n^1.2)
+      500    *      5.140          0.010280          0.004583          0.002966 <-- /* Mediciones */
+     1000    *     11.578          0.011578          0.004717          0.002908 <-- /*  anómalas  */
+     2000    *     26.381          0.013191          0.004911          0.002884
+     4000    *     58.804          0.014701          0.005001          0.002799
+     8000    *    131.389          0.016424          0.005106          0.002722
+    16000    *    288.732          0.018046          0.005127          0.002603
+    32000         651.000          0.020344          0.005282          0.002555
+    64000        1330.000          0.020781          0.004930          0.002272
+   128000        2906.000          0.022703          0.004922          0.002161
+   256000        6715.000          0.026230          0.005197          0.002153
+   512000       14567.000          0.028451          0.005151          0.002052
+
+ 	(*) : tiempo promedio de 1000 ejecuciones del algoritmo
+
+ * Cotas: < n, n^1.13, n^1.20 >
+
+ 	- Cota subestimada: f(n) = n
+ 	- Cota ajusutada: g(n) = n^1.13 || Cte. = (0.0049 - 0.0052)
+ 	- Cota sobreestimada: h(n) = n^1.20
+
+ - t(n) / f(n) cuando n -> infinito ---> infinito (diverge)
+ - t(n) / g(n) cuando n -> infinito ---> Valor constante = Cte > 0
+ - t(n) / h(n) cuando n -> infinito ---> 0 (decrece)
+
+ * Conclusión: t(n) = O(g(n)) = O(n^1.13)
+
+ 	* Inicialización aleatoria:
+
+        n            t(n)       t(n)/(n^1.1)    t(n)/(n*log(n))     t(n)/(n^1.3)
+      500    *     29.554          0.059108          0.009511          0.009161
+     1000    *     62.246          0.062246          0.009011          0.007836 <-- /*  Medición anómala  */
+     2000    *    159.941          0.079970          0.010521          0.008178
+     4000    *    353.781          0.088445          0.010664          0.007346
+     8000         749.000          0.093625          0.010418          0.006316
+    16000        1641.000          0.102563          0.010595          0.005620
+    32000        3488.000          0.109000          0.010508          0.004852
+    64000        7995.000          0.124922          0.011288          0.004516
+   128000       16362.000          0.127828          0.010870          0.003754
+   256000       33728.000          0.131750          0.010580          0.003143
+   512000       69332.000          0.135414          0.010301          0.002624
+
+ 	(*) : tiempo promedio de 1000 ejecuciones del algoritmo
+
+ * Cotas: < n^1.10, n*log(n), n^1.30 >
+
+ 	- Cota subestimada: f(n) = n^1.10
+ 	- Cota ajusutada: g(n) = n*log(n) || Cte. = 0.010
+ 	- Cota sobreestimada: h(n) = n^1.30
+
+ - t(n) / f(n) cuando n -> infinito ---> infinito (diverge)
+ - t(n) / g(n) cuando n -> infinito ---> Valor constante = Cte > 0
+ - t(n) / h(n) cuando n -> infinito ---> 0 (decrece)
+
+ * Conclusión: t(n) = O(g(n)) = O(n*log(n))
+
+
+ CONCLUSIÓN:
+
+ - Como conclusión, el algoritmo de ordenación rápida tarda mucho menos
+ tiempo tanto para la inicialización descendente como para la aleatoria,
+ mientras que para la ascendente es mucho más eficiente por inserción,
+ ya que este último se trata de un algoritmo cuadrático O(n^2), excepto
+ para su mejor caso con inicialización ascendente O(n), mientras que el
+ otro resultó ser O(n^1.10) (aproximadamente, dependiendo del umbral
+ utilizado) y O(n*log(n)).
+
+    El problema de la ordenación por inserción es que cada elemento es comparado
+ con todos sus anteriores hasta que encuentra su posición. Esto lo hace muy
+ eficiente para una lista ya ordenada o "casi ordenada" (mejor caso), pero muy
+ lento para peores casos, siendo la inicialización descendente su peor caso. El
+ algoritmo de ordenación rápida se aprovecha de esta ventaja. Selecciona un
+ pivote por mediana de 3 y va dejando 2 "sublistas" a cada lado, a la izquierda
+ los menores y a la derecha los mayores. Finalmente, (en función del umbral que
+ estemos utilizando), cuando las sublistas están "casi ordenadas", funciona como
+ un algoritmo de ordenación por inserción, el cual, como ya se ha explicado, es
+ muy eficiente en esta situación.
+
+    Con el algoritmo de ordenación rápida se hicieron 3 tests en función del umbral
+ utilizado: umbral = 1, umbral = 10 y umbral = 100. Lo que hemos podido observar es
+ que a medida que el umbral aumentaba, tanto con la inicialización ascendente como
+ con la descendente el algoritmo era más rápido. En cambio, para la inicialización
+ aleatoria parece que con umbral = 10 mejora un poco con respecto al umbral = 1,
+ pero que es más lento con el umbral = 100, lo que creemos que puede ser debido a
+ que el algoritmo de ordenación por inserción, si no se encuentra en el mejor caso,
+ es más eficiente para vectores más pequeños (de ahí que con umbral = 10 se obtengan
+ los mejores tiempos para la inicialización aleatoria).

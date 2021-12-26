@@ -1,0 +1,107 @@
+ [*]
+ [*] TÍTUL0: ALGORITMOS
+ [*] SUBTÍTUL0: Práctica 4
+ [*] @author Mateo Díaz Allegue @login mateo.diaz
+ [*] @author Álvaro Freire Ares @login alvaro.freirea
+ [*] GRUPO: 4.2
+ [*] DATE: 3 / 12 / 2021
+ [*]
+
+ INTRODUCCIÓN:
+
+ - El algoritmo de Prim encuentra un subconjunto de aristas que forman un árbol que incluya
+ todos los vértices del grafo inicial, donde el peso total de las aristas del árbol es el
+ mínimo posible. Para ello, en la matriz de adyacencia se parte de un vértice cualquiera, se
+ escoge la arista de menor peso incidente en el vértice seleccionado anteriormente y se
+ selecciona el otro vértice en el que incide dicha arista. Así continuamente siempre que la
+ arista elegida una un vértice seleccionado y otro que no lo esté, es decir, mientras no se
+ cree ningún ciclo. Una vez todos los vértices del grafo hayan sido seleccionados, el árbol
+ de expansión mínima habrá sido encontrado.
+
+     En esta práctica analizaremos dicho algoritmo, que encuentra un árbol de recubrimiento
+ mínimo en un grafo completo no dirigido. Se inicializarán matrices de adyacencia aleatorias de
+ tamaño NxN y se irá calculando el tiempo de ejecución del algoritmo, siguiendo N una progresión
+ geométrica de razón 2, y así poder estimar la complejidad computacional.
+
+     Las medidas están realizadas en microsegundos. Si la medida del tiempo de ejecución
+ es menor a 500 microsegundos se realiza automáticamente un bucle de 1000 iteraciones
+ del algoritmo a analizar y se calcula la media de los tiempos tardados. En este caso
+ se indicará con '*' en la tabla.
+
+ - Características de la máquina dónde se realiza la medición:
+ 	* OS: Ubuntu 21.04
+ 	* Kernel: Linux 5.11.0-37-generic
+ 	* CPU: Intel Core i7-8550U a 1.80 GHz
+ 	* Memoria Principal: 16 GB
+ 	* Compilador: gcc 11.2.0
+
+
+ MEDICIONES:
+
+ Unidades de las medidas de tiempo:
+ * µs (microsegundos)
+
+    # ALGORITMO DE PRIM
+
+ 	* TABLA 1:
+
+        n            t(n)       t(n)/n^1.89      t(n)/n^2.09        t(n)/n^2.29
+       15    *      0.953          0.005705          0.003319          0.001931
+       30    *      4.154          0.006710          0.003398          0.001721
+       60    *     16.975          0.007398          0.003262          0.001438
+      120    *     80.620          0.009480          0.003639          0.001397
+      240    *    316.775          0.010050          0.003358          0.001122
+      480        1438.000          0.012309          0.003581          0.001042
+      960        7034.000          0.016245          0.004114          0.001042 <-- Medición anómala
+
+ 	(*) : tiempo promedio de 1000 ejecuciones del algoritmo
+
+ 	* TABLA 2:
+
+        n            t(n)       t(n)/n^1.89      t(n)/n^2.09        t(n)/n^2.29
+       15    *      0.956          0.005723          0.003330          0.001937
+       30    *      3.715          0.006001          0.003039          0.001539 <-- Medición anómala
+       60    *     17.762          0.007741          0.003413          0.001505
+      120    *     79.835          0.009387          0.003603          0.001383
+      240    *    319.347          0.010131          0.003385          0.001131
+      480        1425.000          0.012197          0.003548          0.001032
+      960        6996.000          0.016157          0.004092          0.001036 <-- Medición anómala
+
+ 	(*) : tiempo promedio de 1000 ejecuciones del algoritmo
+
+ 	* TABLA 3:
+
+        n            t(n)       t(n)/n^1.89      t(n)/n^2.09        t(n)/n^2.29
+       15    *      0.729          0.004364          0.002539          0.001477 <-- Medición anómala
+       30    *      4.262          0.006884          0.003487          0.001766
+       60    *     17.661          0.007697          0.003394          0.001496
+      120    *     80.512          0.009467          0.003634          0.001395
+      240    *    317.412          0.010070          0.003365          0.001124
+      480        1435.000          0.012283          0.003573          0.001039
+      960        6560.000          0.015150          0.003837          0.000972 <-- Medición anómala
+
+ 	(*) : tiempo promedio de 1000 ejecuciones del algoritmo
+
+    * Cotas: < n^1.89, n^2.09, n^2.29 >
+
+    - Cota subestimada: f(n) = n^1.89
+    - Cota ajusutada: g(n) = n² || Cte. = (0.0033 - 0.0036)
+    - Cota sobreestimada: h(n) = n^2.29
+
+    - t(n) / f(n) cuando n -> infinito ---> infinito (diverge)
+    - t(n) / g(n) cuando n -> infinito ---> Valor constante = Cte > 0
+    - t(n) / h(n) cuando n -> infinito ---> 0 (decrece)
+
+    * Conclusión: t(n) = O(g(n)) = O(n^2.09)
+
+
+ CONCLUSIÓN:
+
+ - Las mediciones del algoritmo de Prim concluyeron en una cota ajustada de n^2.09,
+ muy próxima a la teórica, ya que se trata de un algoritmo cuadrático O(n²). El tamaño
+ inicial de la matriz escogido fue de 15x15 para así tener 7 filas en lugar de las 6
+ que obtendríamos con n = 25x25 (mayor tamaño muestral).
+
+     No se ha permitido que la "n" alcanzase el tamaño máximo (1600x1600) porque a partir
+ del tamaño 960x960 los tiempos siempre resultaban en mediciones anómalas, probablemente
+ debido a paginaciones de memoria ya que se está tratando una matriz muy grande.

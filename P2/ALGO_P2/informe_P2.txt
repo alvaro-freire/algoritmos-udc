@@ -1,0 +1,218 @@
+/**
+ * TÍTUL0: ALGORITMOS
+ * SUBTÍTUL0: Práctica 2
+ * AUTOR 1: Mateo Díaz Allegue LOGIN 1: mateo.diaz
+ * AUTOR 2: Álvaro Freire Ares LOGIN 2: alvaro.freirea
+ * GRUPO: 4.2
+ * DATE: 05 / 10 / 2021
+ */
+
+ INTRODUCCIÓN:
+
+ - Análisis de algoritmos de ordenación de un vector dependiendo del orden inicial
+ de este. Los casos analizados son: vector ordenado ascendentemente, vector ordenado
+ descendentemente y vector ordenado aleatoriamente. Se analizan dos tipos de algoritmos:
+ ordenación por selección y ordenación por shell. Las medidas están realizadas en
+ microsegundos. Si la medida del tiempo de ejecución es menor a 500 microsegundos se
+ realiza automáticamente un bucle de 1000 iteraciones del algoritmo a analizar y se
+ calcula la media de los tiempos tardados. En este caso se indicará con '*' en la tabla.
+
+ - Características de la máquina dónde se realiza la medición:
+ 	* OS: Ubuntu 21.04
+ 	* Kernel: Linux 5.11.0-37-generic
+ 	* CPU: Intel Core i7-8550U a 1.80 GHz
+ 	* Memoria Principal: 16 GB
+ 	* Compilador: gcc 10.3.0
+
+ MEDICIONES:
+
+ Unidades de las medidas de tiempo:
+ * µs (microsegundos)
+
+    # ORDENACIÓN POR SELECCIÓN
+
+ 	* Inicialización ascendente:
+
+         n          t(n)    t(n)/n^1.70    t(n)/n^2.00     t(n)/n^2.20
+       500   *   232.519       0.006001       0.000930        0.000268
+      1000       924.000       0.007340       0.000924        0.000232
+      2000      3690.000       0.009021       0.000923        0.000202
+      4000     14673.000       0.011041       0.000917        0.000175
+      8000     58715.000       0.013599       0.000917        0.000152
+     16000    234126.000       0.016690       0.000915        0.000132
+     32000    926004.000       0.020317       0.000904        0.000114
+
+ 	(*) : tiempo promedio de 1000 ejecuciones del algoritmo
+
+ * Cotas: < n^1.70, n², n^2.20 >
+
+ 	- Cota subestimada: f(n) = n^1.70
+ 	- Cota ajusutada: g(n) = n² || Cte. = 0.0009
+ 	- Cota sobreestimada: h(n) = n^2.20
+
+ - t(n) / f(n) cuando n -> infinito ---> infinito (diverge)
+ - t(n) / g(n) cuando n -> infinito ---> Valor constante = Cte > 0
+ - t(n) / h(n) cuando n -> infinito ---> 0 (decrece)
+
+ * Conclusión: t(n) = O(g(n)) = O(n²)
+
+ 	* Inicialización descendente:
+
+         n          t(n)    t(n)/n^1.80    t(n)/n^2.00     t(n)/n^2.20
+       500   *   275.670       0.003822       0.001103        0.000318  /* Medición anómala */
+      1000       995.000       0.003961       0.000995        0.000250
+      2000      3965.000       0.004533       0.000991        0.000217
+      4000     15834.000       0.005199       0.000990        0.000188
+      8000     62949.000       0.005935       0.000984        0.000163
+     16000    247061.000       0.006689       0.000965        0.000139
+     32000    973062.000       0.007566       0.000950        0.000119
+
+ 	(*) : tiempo promedio de 1000 ejecuciones del algoritmo
+
+ 	* Mediciones anómalas: *******************************************************************************
+
+ * Cotas: < n^1.80, n², n^2.20 >
+
+ 	- Cota subestimada: f(n) = n^1.80
+ 	- Cota ajusutada: g(n) = n² || Cte. = 0.0009
+ 	- Cota sobreestimada: h(n) = n ^2.20
+
+ - t(n) / f(n) cuando n -> infinito ---> infinito (diverge)
+ - t(n) / g(n) cuando n -> infinito ---> Valor constante = Cte > 0
+ - t(n) / h(n) cuando n -> infinito ---> 0 (decrece)
+
+ * Conclusión: t(n) = O(g(n)) = O(n²)
+
+ 	* Inicialización aleatoria:
+
+         n          t(n)    t(n)/n^1.90    t(n)/n^2.00     t(n)/n^2.10
+       500   *   247.998       0.001847       0.000992        0.000533
+      1000       953.000       0.001901       0.000953        0.000478
+      2000      3736.000       0.001997       0.000934        0.000437
+      4000     14808.000       0.002121       0.000925        0.000404
+      8000     58993.000       0.002264       0.000922        0.000375
+     16000    233894.000       0.002405       0.000914        0.000347
+     32000    939523.000       0.002589       0.000918        0.000325
+
+
+ 	(*) : tiempo promedio de 1000 ejecuciones del algoritmo
+
+ * Cotas: < n^1.90, n², n^2.10 >
+
+ 	- Cota subestimada: f(n) = n^1.90
+ 	- Cota ajusutada: g(n) = n² || Cte. = 0.0009
+ 	- Cota sobreestimada: h(n) = n^2.10
+
+ - t(n) / f(n) cuando n -> infinito ---> infinito (diverge)
+ - t(n) / g(n) cuando n -> infinito ---> Valor constante = Cte > 0
+ - t(n) / h(n) cuando n -> infinito ---> 0 (decrece)
+
+ * Conclusión: t(n) = O(g(n)) = O(n²)
+
+    # ORDENACIÓN POR SHELL
+
+ 	* Inicialización ascendente:
+
+         n          t(n)    t(n)/n^1.05    t(n)/n^1.12     t(n)/n^1.30
+       500   *    12.854       0.018842       0.012195        0.003985
+      1000   *    29.611       0.020963       0.012926        0.003728
+      2000   *    64.866       0.022179       0.013028        0.003316
+      4000   *   142.074       0.023461       0.013128        0.002950
+      8000   *   309.238       0.024663       0.013147        0.002608
+     16000       814.000       0.031354       0.015922        0.002788  /* Medición anómala */
+     32000      1450.000       0.026975       0.013050        0.002017
+     64000      3078.000       0.027655       0.012745        0.001739
+    128000      6576.000       0.028536       0.012528        0.001509
+    256000     13919.000       0.029171       0.012201        0.001297
+    512000     30591.000       0.030964       0.012337        0.001158
+
+ 	(*) : tiempo promedio de 1000 ejecuciones del algoritmo
+
+ 	* Mediciones anómalas: *******************************************************************************
+
+ * Cotas: < n^1.05, n^1.12, n^1.30 >
+
+ 	- Cota subestimada: f(n) = n^1.05
+ 	- Cota ajusutada: g(n) = n^1.12 || Cte. = 0.012
+ 	- Cota sobreestimada: h(n) = n^1.30
+
+ - t(n) / f(n) cuando n -> infinito ---> infinito (diverge)
+ - t(n) / g(n) cuando n -> infinito ---> Valor constante = Cte > 0
+ - t(n) / h(n) cuando n -> infinito ---> 0 (decrece)
+
+ * Conclusión: t(n) = O(g(n)) = O(n^1.12)
+
+ 	* Inicialización descendente:
+
+         n          t(n)    t(n)/n^1.00    t(n)/n^1.12     t(n)/n^1.30
+       500   *    18.571       0.037142       0.017619        0.005757
+      1000   *    41.094       0.041094       0.017938        0.005173
+      2000   *    90.489       0.045244       0.018174        0.004627
+      4000   *   196.959       0.049240       0.018200        0.004090
+      8000   *   428.327       0.053541       0.018210        0.003612
+     16000       946.000       0.059125       0.018504        0.003240
+     32000      2006.000       0.062687       0.018054        0.002790
+     64000      4402.000       0.068781       0.018228        0.002487
+
+ 	(*) : tiempo promedio de 1000 ejecuciones del algoritmo
+
+ * Cotas: < n, n^1.12, n^1.30 >
+
+ 	- Cota subestimada: f(n) = n
+ 	- Cota ajusutada: g(n) = n^1.12 || Cte. = 0.018
+ 	- Cota sobreestimada: h(n) = n^1.30
+
+ - t(n) / f(n) cuando n -> infinito ---> infinito (diverge)
+ - t(n) / g(n) cuando n -> infinito ---> Valor constante = Cte > 0
+ - t(n) / h(n) cuando n -> infinito ---> 0 (decrece)
+
+ * Conclusión: t(n) = O(g(n)) = O(n^1.12)
+
+ 	* Inicialización aleatoria:
+
+         n          t(n)    t(n)/n^1.05    t(n)/n^1.20     t(n)/n^1.40
+       500   *    44.051       0.064571       0.025421        0.007335
+      1000   *   104.634       0.074075       0.026283        0.006602
+      2000   *   238.017       0.081382       0.026024        0.005691
+      4000       536.000       0.088512       0.025509        0.004856
+      8000      1235.000       0.098497       0.025583        0.004240
+     16000      2761.000       0.106351       0.024896        0.003592
+     32000      6267.000       0.116588       0.024597        0.003089
+     64000     14463.000       0.129948       0.024708        0.002702
+    128000     33348.000       0.144710       0.024798        0.002360
+    256000     76114.000       0.159519       0.024636        0.002041
+    512000    182204.000       0.184427       0.025670        0.001852
+
+ 	(*) : tiempo promedio de 1000 ejecuciones del algoritmo
+
+ * Cotas: < n^1.05, n^1.20, n^1.40 >
+
+ 	- Cota subestimada: f(n) = n^1.05
+ 	- Cota ajusutada: g(n) = n^1.20 || Cte. = 0.025
+ 	- Cota sobreestimada: h(n) = n^1.40
+
+ - t(n) / f(n) cuando n -> infinito ---> infinito (diverge)
+ - t(n) / g(n) cuando n -> infinito ---> Valor constante = Cte > 0
+ - t(n) / h(n) cuando n -> infinito ---> 0 (decrece)
+
+ * Conclusión: t(n) = O(g(n)) = O(n^1.20)
+
+
+ CONCLUSIÓN:
+
+ - Como conclusión, el algoritmo de ordenación shell tarda mucho menos
+ tiempo en ejecutarse que el de ordenación por selección, ya que este
+ último se trata de un algoritmo cuadrático (O(n^2)) mientras que el
+ otro resultó ser O(n^1.12) y O(n^1.20).
+
+    La ventaja de la ordenación shell es que compara elementos separados por
+ un espacio de varias posiciones. Esto permite que un elemento haga "pasos más
+ grandes" hacia su posición esperada. Finalmente, cuando la lista está "casi
+ ordenada", funciona como un algoritmo de ordenación por inserción, el cual
+ es muy eficiente en esta situación. De hecho, los datos de las mediciones
+ del segundo algoritmo son casi siempre tiempos menores a 500 ms, mientras
+ que para el primer algoritmo solamente sucede en los casos de n = 500.
+
+    También podemos observar que por este mismo motivo, el algoritmo shell
+ tarda más en el caso de la inicialización aleatoria, y el mejor caso sería
+ el inicialización ascendente para ambos algoritmos.
