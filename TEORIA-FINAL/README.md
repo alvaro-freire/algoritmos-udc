@@ -1,8 +1,8 @@
 # FINAL TEORÍA -> 12 ENERO 2022
 
-## EJERCICIO 1:
+## EJERCICIO 1 (2.5 puntos):
 
-### (2.5 puntos) Diccionario de datos:
+### Diccionario de datos:
 
 #### a) Diseñe, escribiendo su pseudocódigo, los algoritmos *inicializarTabla*, *insertar*, *buscar*, y *eliminar* usando *exploración cuadrática*, de modo que las tres últimas rutinas se ejecuten en un tiempo promedio constante. Usa la siguiente declaración de tipos:
 
@@ -22,3 +22,14 @@ tipo
 
 
 #### b) Con la siguiente función *hash*:
+
+####                               *hash*("a", 11) = 8
+####                               *hash*("b", 11) = 7
+####                               *hash*("c", 11) = 7
+####                               *hash*("d", 11) = 7
+####                               *hash*("e", 11) = 8
+####                               *hash*("f", 11) = 8
+
+#### muestre el resultado de insertar las claves: "a", "b", "c", "d", "e" y "f" (en ese orden) en la siguiente tabla:
+
+
