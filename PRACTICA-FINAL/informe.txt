@@ -1,0 +1,123 @@
+/*
+ * TÍTUL0: ALGORITMOS
+ * SUBTÍTUL0: PRUEBA FINAL
+ * AUTOR 2: Álvaro Freire Ares LOGIN 2: alvaro.freirea
+ * GRUPO: 4.2
+ * DATE: 12 / 01 / 2022
+ */
+
+INTRODUCCIÓN:
+
+- Análisis de algoritmos de la subsecuencia máxima de un vector de enteros.
+En esta práctica se va a estudiar de forma empírica la complejidad computacional
+de tres algoritmos dados en los que se calcula la subsecuencia máxima de un valor
+de enteros. Las medidas de tiempo están realizadas en microsegundos. Si la medida 
+del tiempo de ejecución es menor a 500 microsegundos se realiza automáticamente
+un bucle de 1000 iteraciones del algoritmo a analizar y se calcula la media de
+los tiempos tardados. En este caso se indicará con '*' en la tabla.
+
+
+- Características de la máquina dónde se realiza la medición:
+	* OS: Ubuntu 21.04
+	* Kernel: Linux 5.4
+	* CPU: Intel Core i7-8550U a 1.80 GHz
+	* Memoria Principal: 16 GB
+	* Compilador: gcc 11.2.0
+
+MEDICIONES:
+
+Unidades de las medidas de tiempo: 
+* µs (microsegundos)
+
+	* Tabla 1:
+
+        n              t(n)    t(n)/n^1.8        t(n)/n²      t(n)/n^2.2
+      500       *   260.859      0.003616       0.001043        0.000301
+     1000          1335.000      0.005315       0.001335        0.000335
+     2000          5933.000      0.006783       0.001483        0.000324
+     4000         17571.000      0.005769       0.001098        0.000209
+     8000         69010.000      0.006507       0.001078        0.000179
+    16000        258464.000      0.006998       0.001010        0.000146
+    32000       1037669.000      0.008068       0.001013        0.000127
+
+	(*) : tiempo promedio de 1000 ejecuciones del algoritmo
+
+* Cotas: < n^1.8, n^2, n^2.2 >
+
+	- Cota subestimada: f(n) = n^1.8
+	- Cota ajusutada: g(n) = n^2 || Cte. = 0.0010
+	- Cota sobreestimada: h(n) = n ^2.2
+
+- t(n) / f(n) cuando n -> infinito ---> infinito (diverge)
+- t(n) / g(n) cuando n -> infinito ---> Valor constante = Cte > 0
+- t(n) / h(n) cuando n -> infinito ---> 0 (decrece)
+
+* Conclusión: t(n) = O(g(n)) = O(n^2)
+
+	* Tabla 2:
+
+        n            t(n)      t(n)/n^0.8         t(n)/n      t(n)/n^1.2
+      500       *   1.660        0.011506       0.003320        0.000958
+     1000       *   3.234        0.012875       0.003234        0.000812
+     2000       *   5.669        0.012962       0.002834        0.000620
+     4000       *  11.100        0.014577       0.002775        0.000528
+     8000       *  19.333        0.014582       0.002417        0.000400
+    16000       *  37.341        0.016177       0.002334        0.000337
+    32000       *  67.886        0.016891       0.002121        0.000266
+
+	(*) : tiempo promedio de 1000 ejecuciones del algoritmo
+
+* Cotas: < n^0.8, n, n^1.2 >
+
+	- Cota subestimada: f(n) = n^0.8
+	- Cota ajusutada: g(n) = n || Cte. = 0.0027
+	- Cota sobreestimada: h(n) = n ^1.2
+
+- t(n) / f(n) cuando n -> infinito ---> infinito (diverge)
+- t(n) / g(n) cuando n -> infinito ---> Valor constante = Cte > 0
+- t(n) / h(n) cuando n -> infinito ---> 0 (decrece)
+
+* Conclusión: t(n) = O(g(n)) = O(n)
+
+
+    * Tabla 3:
+
+            n            t(n)      t(n)/n^0.9    t(n)/n^1.05      t(n)/n^1.2
+          500	    *  27.122	     0.100235	    0.039756	    0.015652
+         1000	    *  55.976	     0.113030	    0.039628	    0.014061
+         2000    	* 118.124	     0.124121	    0.040388	    0.012915
+         4000	    * 240.475	     0.136786	    0.039711	    0.011445
+         8000	    * 497.098	     0.153276	    0.039646	    0.010298
+        16000	     1026.000	     0.166193	    0.039520	    0.009251
+        32000	     2120.000 	     0.191260	    0.039439  	    0.008321
+
+    	(*) : tiempo promedio de 1000 ejecuciones del algoritmo
+
+    * Cotas: < n^0.9, n^1.05, n^1.2 >
+
+    	- Cota subestimada: f(n) = n^0.9
+    	- Cota ajusutada: g(n) = n^1.05 || Cte. = (0.039 - 0.040)
+    	- Cota sobreestimada: h(n) = n^1.2
+
+    - t(n) / f(n) cuando n -> infinito ---> infinito (diverge)
+    - t(n) / g(n) cuando n -> infinito ---> Valor constante = Cte > 0
+    - t(n) / h(n) cuando n -> infinito ---> 0 (decrece)
+
+    * Conclusión: t(n) = O(g(n)) = O(n^1.05)
+
+CONCLUSIÓN:
+
+- En la práctica 1 habíamos concluido que el algoritmo 1 tardaba mucho más
+tiempo en ejecutarse que el algoritmo 2, puesto que el primero se trata de
+un algoritmo cuadrático (O(n^2)) mientras que el segundo es un algoritmo
+lineal (O(n)). Una vez añadido el tercer algoritmo para la subsecuencia
+máxima de un vector, vemos que este tarda un poco más que el segundo, por
+lo que no es el mejor algoritmo, pero es mucho más eficiente que el cuadrático.
+Como podemos ver en las tablas, los datos de las mediciones de este algoritmo
+son en casi todas las tablas menores a 500ms, en el segundo algoritmo lo son
+siempre y para el primer algoritmo solamente sucede en ciertas ocasiones con
+n = 500.
+
+    La cota teórica de este nuevo algoritmo es O(n*log(n)), puesto que
+utiliza el método divide y vencerás, dividiendo el vector en una mitad izquierda
+y otra derecha que se vuelven a dividir recursivamente hasta llegar al caso base.
