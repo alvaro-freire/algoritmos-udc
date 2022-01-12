@@ -33,4 +33,4 @@ tipo
 #### muestre el resultado de insertar las claves: "a", "b", "c", "d", "e" y "f" (en ese orden) en la siguiente tabla:
 
 | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 |
-|  |  |  |  |  |  |  |  |  |  |  |
+| -- | -- | -- | -- | -- | -- | -- | -- | -- | -- | -- |
