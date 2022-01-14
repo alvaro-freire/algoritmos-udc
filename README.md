@@ -19,6 +19,15 @@ Material de la asignatura de Algoritmos del curso 2021/22.
 
 - Tema 7: [Complejidad Computacional.](./TEORIA/T7)
 
+## TGR:
+> Teoría de grupos reducidos. Los 2, 4 y 5 fueron evaluables.
+
+- TGR 1: [TGR 1](./TGRs/TGR\ 1)
+- TGR 2 (3.333%): [TGR 2](./TGRs/TGR\ 2)
+- TGR 3: [TGR 3](./TGRs/TGR\ 3)
+- TGR 4 (3.333%): [TGR 4](./TGRs/TGR\ 4)
+- TGR 5 (3.333%): [TGR 5](./TGRs/TGR\ 5)
+
 
 ## PRÁCTICAS:
 > Prácticas evaluables (10% de la nota final) realizadas durante las clases de prácticas del curso.
