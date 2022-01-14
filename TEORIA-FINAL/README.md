@@ -80,3 +80,11 @@ fin función
 ##### d) Concrete los elementos característicos de la técnica voraz que correspondan a este ejemplo.
 
 ##### e) Análisis detallado de la complejidad.
+
+### EJERCICIO 4 (*1.5 puntos*):
+
+####
+
+### EJERCICIO 5 (*1.5 puntos*):
+
+#### Represente mediante un grafo decorado todas las situaciones de juego que podrían alcanzarse a partir de un montón de 6 palillos para la variante del *juego de Nim* vista en clase.
