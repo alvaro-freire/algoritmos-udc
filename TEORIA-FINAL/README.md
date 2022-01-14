@@ -83,7 +83,11 @@ fin función
 
 ### EJERCICIO 4 (*1.5 puntos*):
 
-####
+#### Construir la tabla con la que podría determinarse en programación dinámica la manera óptima de pagar una cantidad de 12 unidades de valor con un mínimo de monedas, sabiendo que el sistema monetario considerado está constituido por monedas de 1, 4, 6, 8 y 9 unidades de valor.
+
+#### a) Indicar la solución al problema dibujando una traza en la tabla anterior para justificar cómo se obtiene.
+
+#### b) ¿Por qué se descartaría el uso de la técnica voraz para resolver este problema?
 
 ### EJERCICIO 5 (*1.5 puntos*):
 
