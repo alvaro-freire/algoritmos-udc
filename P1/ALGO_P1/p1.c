@@ -21,8 +21,10 @@ double microsegundos() {
     struct timeval t;
 
     /* obtiene la hora del sistema en microsegundos */
-    if (gettimeofday(&t, NULL) < 0)
+    if (gettimeofday(&t, NULL) < 0) {
         return 0.0;
+    }
+
     return (t.tv_usec + t.tv_sec * 1000000.0);
 }
 
@@ -34,10 +36,12 @@ int sumaSubMax1(int v[], int n) {
         estaSuma = 0;
         for (j = i; j < n; j++) {
             estaSuma += v[j];
-            if (estaSuma > sumaMax)
+            if (estaSuma > sumaMax) {
                 sumaMax = estaSuma;
+            }
         }
     }
+
     return sumaMax;
 }
 
@@ -46,11 +50,14 @@ int sumaSubMax2(int v[], int n) {
 
     for (i = 0; i < n; i++) {
         estaSuma += v[i];
-        if (estaSuma > sumaMax)
+
+        if (estaSuma > sumaMax) {
             sumaMax = estaSuma;
-        else if (estaSuma < 0)
+        } else if (estaSuma < 0) {
             estaSuma = 0;
+        }
     }
+
     return sumaMax;
 }
 
@@ -60,25 +67,27 @@ void listar_vector(int v[], int n, int n1, int n2) {
 
     printf("[ ");
     for (i = 0; i < n; i++) {
-        if (i == n - 1)
+        if (i == n - 1) {
             printf("%2d ]", v[i]);
-        else
+        } else {
             printf("%2d, ", v[i]);
+        }
     }
 
     /* solo se muestra en el test1, no en el test2: */
-    if (n1 != NULL_INT && n2 != NULL_INT)
+    if (n1 != NULL_INT && n2 != NULL_INT) {
         printf("%4s%2d%16s%2d\n", "", n1, "", n2);
+    }
 }
 
 void test1() {
+    int i, r1, r2;
     int v[6][5] = {{-9, 2,  -5, -4, 6},
                    {4,  0,  9,  2,  5},
                    {-2, -1, -9, -7, -1},
                    {9,  -2, 1,  -7, -8},
                    {15, -2, -5, -4, 16},
                    {7,  -5, 6,  7,  -7}};
-    int i, r1, r2;
 
     printf("Secuencias%15sResultado1\tResultado2\n", "");
 
@@ -134,6 +143,16 @@ double generate_and_sort(void (*algo)(int [], int), int v[], int n) {
     return ta - tb;
 }
 
+double sort(void (*algo)(int [], int), int v[], int n) {
+    double ta, tb;
+
+    tb = microsegundos();
+    (*algo)(v, n);
+    ta = microsegundos();
+
+    return ta - tb;
+}
+
 double generate(int v[], int n) {
     double ta, tb;
     int i;
@@ -180,7 +199,7 @@ void print_test3(int n, double tf, bool lt500, bool algo1) {
                    n, tf, tf / pow(n, 0.8), tf / n, tf / pow(n, 1.2));
         } else {
             printf("%9d\t%11.3f\t%9.6f\t%7.6f\t%7.6f\n",
-                   n, tf, tf / pow(n, 0.4), tf / pow(n, 0.6), tf / pow(n, 0.8));
+                   n, tf, tf / pow(n, 0.8), tf / n, tf / pow(n, 1.2));
         }
     }
 }
@@ -192,13 +211,13 @@ void print_head(int algo) {
         printf("%8st(n)/n²%6st(n)/n^2.2\n", "", "");
     } else {
         printf("\nAlgoritmo 2:\n");
-        printf("\tn%12st(n)%6st(n)/n^0.4", "", "");
-        printf("%5st(n)/n^0.6%6st(n)/n^0.8\n", "", "");
+        printf("\tn%12st(n)%6st(n)/n^0.8", "", "");
+        printf("%9st(n)/n%6st(n)/n^1.2\n", "", "");
     }
 }
 
 void test3(void (*algo)(int [], int), int n_algo) {
-    double tb, ta, tf;
+    double tf;
     int v[32000];
     int n = 500, i;
     bool algo1 = n_algo == 1;
@@ -210,10 +229,7 @@ void test3(void (*algo)(int [], int), int n_algo) {
         aleatorio(v, n);
 
         /* se miden tiempos */
-        tb = microsegundos();
-        (*algo)(v, n);
-        ta = microsegundos();
-        tf = ta - tb;
+        tf = sort(algo, v, n);
 
         /* si el tiempo final es menor que 500, se
          * calcula K (1000) veces y se hace la media: */
