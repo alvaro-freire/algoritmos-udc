@@ -70,3 +70,13 @@ función Kruskal ( G = { N, A } ) : tipo:salida {1}
     devolver <T, peso>
 fin función
 ```
+
+##### a) Precise el tipo de datos de la salida de la función ({1}).
+
+##### b) Reescriba las instrucciones {2} y {3} introduciendo el uso de un montículo, decisión que justificará en su respuesta.
+
+##### c) Enuncie de forma precisa el problema que resuelve este algoritmo.
+
+##### d) Concrete los elementos característicos de la técnica voraz que correspondan a este ejemplo.
+
+##### e) Análisis detallado de la complejidad.
