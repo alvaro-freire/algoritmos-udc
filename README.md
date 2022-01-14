@@ -22,7 +22,7 @@ Material de la asignatura de Algoritmos del curso 2021/22.
 ## TGR:
 > Teoría de grupos reducidos. Los 2, 4 y 5 fueron evaluables.
 
-- TGR 1: [TGR 1](./TGRs/TGR\ 1)
+- TGR 1: [TGR 1](./TGRs/'TGR 1')
 - TGR 2 (3.333%): [TGR 2](./TGRs/TGR\ 2)
 - TGR 3: [TGR 3](./TGRs/TGR\ 3)
 - TGR 4 (3.333%): [TGR 4](./TGRs/TGR\ 4)
