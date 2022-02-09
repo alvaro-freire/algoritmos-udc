@@ -49,3 +49,9 @@ Material de la asignatura de Algoritmos del curso 2021/22.
 > Examen práctico (20% de la nota final). Duración: 1h 45min.
 
 - [Final Prácticas.](./PRACTICA-FINAL)
+
+
+<!-- LICENSE -->
+## License
+
+Distributed under the MIT License. See `LICENSE` for more information.
